@@ -1,0 +1,159 @@
+@{
+    ViewData["Title"] = "Chi tiết phiếu nhập";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+@model QLNXCX.Models.Ctpn
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3"><strong>NHẬP NHIÊN LIỆU</strong></h1>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Phiếu Nhập</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="input_disable">
+                            <div class="col-md-6">
+                                <b>Ngày nhập:</b>
+                                <input value="@ViewData["tg"]" type="text" name="ngayxuat" style="background-color: #FFFAB3;" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <b>Mã phiếu nhập:</b>
+                                <input type="text" value="@ViewData["mapn"]" style="background-color: 	#FFFAB3;" disabled>
+                                <br><br>
+                                <b>Trạm xăng dầu:</b>
+                                <input value="@ViewData["tram"]" type="text" name="tramxangdau" style="background-color: #FFFAB3;" disabled>
+                            </div>
+                        </div>
+                        <div class="mb-3" style="width: 90%;">
+                            <label class="form-label"><b>Nhân Viên Xử Lý:</b></label>
+                            <select style="height: 40px;" class="form-select mb-3" disabled>
+                                <option selected>@ViewData["nv"]</option>
+
+                            </select>
+                        </div>
+                        <div class="mb-3" style="width: 90%;">
+                            <label class="form-label"><b>Nhà Cung Cấp:</b></label>
+                            <select style="height: 40px;" class="form-select mb-3" disabled>
+                                <option selected>@ViewData["ncc"]</option>                         
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <form asp-action="Add" method="post">
+                <input type="text" asp-for="IdPhieunhap" value="@ViewData["mapn"]" style="background-color: #FFFAB3;display:none;">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Nhập Nhiên Liệu</h5>
+                        </div>
+                        <div class="card-body">                       
+                            <div class="mb-3" style="width: 90%;">
+                                <label class="form-label"><b>Tên Nhiên Liệu:</b></label>
+                                <select asp-for="IdNhienlieu" asp-items="ViewBag.nhienlieu" style="height: 40px;" class="form-select mb-3">
+                                    <option selected>Chọn nhiên liệu</option>                                
+                                </select>
+                            </div>
+                            <div class="mb-3" style="width: 40%;">
+                                <label class="form-label"><b>Đơn Giá:</b></label>
+                                <div class="input-group">
+                                    <input asp-for="Dongia" id="dongia" type="number" class="form-control" name="dongia" oninput="Cal_thanhtien()">
+                                    <span class="input-group-text"><b>VND</b></span>
+                                </div>
+                                <span asp-validation-for="Dongia" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3" style="width: 40%;">
+                                <label class="form-label"><b>Số Lượng:</b></label>
+                                <div class="input-group">
+                                    <input asp-for="SoLuong" id="soluong" type="number" class="form-control" name="soluong" oninput="Cal_thanhtien()">
+                                    <span class="input-group-text"><b>Lít</b></span>
+                                </div>
+                                <span asp-validation-for="SoLuong" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row justify-content-end">
+                                <div class="col-md-4 mb-4 ">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><b>Thành tiền</b>:</span>
+                                        <input id="thanhtien" type="text" class="form-control " name="thanhtien" disabled readonly>
+                                        <span class="input-group-text"><b>VND</b></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 ml-auto mb-3">
+                                    <input value="Add" type="submit" class="btn btn-primary ml-auto mr-2">                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>       
+        <div class="row justify-content-end">
+            <div class="col-md-3 ml-auto mb-3">          
+                <a asp-action="Index" asp-controller="Home" type="button" class="btn btn-danger mr-2">Cancel</a>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function Cal_thanhtien() { 
+        var dongia = document.querySelector("#dongia").value;
+        var soluong = document.querySelector("#soluong").value;
+
+        var thanhtien = dongia * soluong;
+        document.querySelector("#thanhtien").value = thanhtien;
+    }
+
+</script>
+
+<style>
+
+    .navbar-bg {
+        background: #fff;
+        margin-left: 10px;
+    }
+
+    #dongia {
+        font-size: 12px;
+    }
+
+    #btn {
+        float: right;
+        margin-right: 290px;
+    }
+
+    #thanhtien, #tongtien {
+        color: red;
+        font-size: 17px;
+        font-weight: bold;
+        background-color: khaki;
+    }
+
+    #input_disable input {
+        height: 30px;
+        color: #103667;
+    }
+
+    #input_disable {
+        margin-bottom: 20px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        margin-right: 5px;
+    }
+</style>
+
+

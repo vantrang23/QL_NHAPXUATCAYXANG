@@ -1,0 +1,98 @@
+@model QLNXCX.Models.Banggia
+
+@{
+	ViewData["Title"] = "Điều chỉnh giá";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<main class="content">
+	<h1 id="tieude" class="h3 mb-3" ><strong>ĐIỀU CHỈNH BẢNG GIÁ NHIÊN LIỆU BÁN RA</strong></h1><br>
+	<div id="container" class="container-fluid p-0">
+		<form asp-action="Create">
+			@* <div class="col-md-6">
+				<b>Thời gian điều chỉnh:</b>
+				<input value="@DateTime.Now.ToString("dd/mm/yyyy h:m")" type="text" name="tgdieuchienh" style="background-color: #FFFAB3;" disabled>
+			</div> *@
+			<br>
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="row">
+				<div class="col-12 col-lg-8">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0" style="font-size: 18px; color: brown;">Điều Chỉnh Giá Nhiên liệu</h5>
+						</div>
+						<div class="card-body">
+							<div class="mb-3" style="width: 95%;">
+								<label asp-for="IdNhienlieu" class="form-label">Tên Nhiên Liệu</label>
+								<select class="form-select mb-3" asp-for="IdNhienlieu" asp-items=" ViewBag.tennl ">
+									<option selected disabled value="" >Lựa chọn tên nhiên liệu</option>
+								</select>
+							</div>
+						
+							<div class="mb-3" style="width: 95%;">
+								<label asp-for="NgayCn" class="control-label">Ngày điều chỉnh </label>
+								<input asp-for="NgayCn" value="@DateTime.Now" asp-format="{0:MM-dd-yyyy HH:mm}"  type="text" class="form-control" readonly />
+								<span asp-validation-for="NgayCn" class="text-danger"></span>
+							</div>
+
+							<div class="mb-3" style="width: 50%;">
+								<label asp-for="Gia" class="form-label">Giá bán ra</label>
+								<div class="input-group" id="dongia">
+									<input asp-for="Gia" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+									<div class="input-group-append">
+										<!-- <span class="input-group-text">000</span> -->
+										<span class="input-group-text">VND/Lít</span>					
+									</div>
+									<span asp-validation-for="Gia" class="text-danger"></span>
+								</div>
+							</div>
+								
+						</div>
+
+					</div>
+				</div>
+			</div>	
+			<button id="bt_dieuchinh" type="submit" value="Create" class="btn btn-primary">Điều Chỉnh</button>
+			<a asp-controller="Home" asp-action="Index" type="button" class="btn btn-danger mr-2">Cancel</a>
+		</form>
+	</div>
+</main>
+<style>
+	.navbar-bg {
+		background: #fff;
+		margin-left: 10px;
+	}
+
+	.input-group-append {
+		display: flex;
+	}
+
+	#container {
+		margin-left: 200px;
+	}
+
+	#tieude {
+		text-align: center;
+		font-size: 20px;
+	}
+
+	h5 {
+		text-align: center;
+		font-weight: bold;
+	}
+
+	
+
+	label {
+		font-weight: bold;
+	}
+
+	button {
+		margin-left: 50%;
+		margin-right: 5px;
+	}
+</style>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

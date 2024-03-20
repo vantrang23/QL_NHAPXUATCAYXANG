@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 22, 2024 at 04:39 PM
+-- Generation Time: Mar 20, 2024 at 04:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -38,8 +38,36 @@ CREATE TABLE `banggia` (
 --
 
 INSERT INTO `banggia` (`ID_NHIENLIEU`, `NGAY_CN`, `GIA`) VALUES
-(1, '2024-02-22 16:30:45', 1200),
-(2, '2024-02-22 16:30:57', 18000);
+(1, '2024-03-20 08:58:54', 20000),
+(1, '2024-03-20 23:49:26', 17000),
+(2, '2024-03-20 08:59:34', 21500),
+(3, '2024-03-20 08:59:59', 22000),
+(4, '2024-03-20 09:00:10', 21300),
+(5, '2024-03-20 09:00:22', 18000),
+(6, '2024-03-20 09:00:47', 18300);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banggiancc`
+--
+
+CREATE TABLE `banggiancc` (
+  `ID_NCC` int NOT NULL,
+  `ID_NHIENLIEU` int NOT NULL,
+  `GIA` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `banggiancc`
+--
+
+INSERT INTO `banggiancc` (`ID_NCC`, `ID_NHIENLIEU`, `GIA`) VALUES
+(1, 1, 22000),
+(2, 2, 21000),
+(3, 3, 18500),
+(4, 2, 19500),
+(5, 6, 19300);
 
 -- --------------------------------------------------------
 
@@ -54,6 +82,14 @@ CREATE TABLE `ctpn` (
   `DONGIA` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ctpn`
+--
+
+INSERT INTO `ctpn` (`ID_PHIEUNHAP`, `ID_NHIENLIEU`, `SO_LUONG`, `DONGIA`) VALUES
+(1, 1, 60, 20000),
+(2, 4, 80, 18000);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +101,16 @@ CREATE TABLE `dutru` (
   `ID_NHIENLIEU` int NOT NULL,
   `SO_LUONG` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dutru`
+--
+
+INSERT INTO `dutru` (`ID_TRAM`, `ID_NHIENLIEU`, `SO_LUONG`) VALUES
+('tr1p1', 1, 250),
+('tr1p1', 2, 150),
+('tr1p1', 3, 100),
+('tr1p1', 5, 150);
 
 -- --------------------------------------------------------
 
@@ -86,7 +132,10 @@ CREATE TABLE `nhacungcap` (
 --
 
 INSERT INTO `nhacungcap` (`ID_NCC`, `TEN_NCC`, `DIA_CHI`, `SDT`, `EMAIL`, `TRANG_THAI`) VALUES
-(1, 'Công Ty Xăng dầu Việt Nam', 'Hà Nội', '070681987', 'xangdauvn@gmail.com', 1);
+(1, 'Tập đoàn Xăng dầu Việt Nam (Petrolimex)', '1 Khâm Thiên, P. Khâm Thiên, Q. Đống Đa, Hà Nội', '02438512603', 'banbientapweb@petrolimex.com.vn', 1),
+(2, 'Công Ty Cổ Phần Dầu Khí Đông Phương', 'KCN Hưng Phú 2A, P. Phú Thứ, Q. Cái Răng, TP. Cần Thơ', '02835533325', 'sales@pms.petrolimex.com.vn', 1),
+(3, 'Công ty Xăng dầu Khu vực II', 'số 15 Lê Duẩn, P. Bến Nghé, Q. 1, TP. Hồ Chí Minh', '02838292081', 'kv2@petrolimex.com.vn', 0),
+(4, 'Công ty Xăng dầu Quân đội', 'Số 33B Phạm Ngũ Lão, Phường Phan Chu Trinh, Quận Hoàn Kiếm, TP Hà Nội', '02437567895', 'xangdauquandoi@gmail.com.vn', 1);
 
 -- --------------------------------------------------------
 
@@ -96,7 +145,7 @@ INSERT INTO `nhacungcap` (`ID_NCC`, `TEN_NCC`, `DIA_CHI`, `SDT`, `EMAIL`, `TRANG
 
 CREATE TABLE `nhanvien` (
   `ID_NV` int NOT NULL,
-  `ID_TK` int NOT NULL,
+  `ID_TK` int DEFAULT NULL,
   `HO_NV` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TEN_NV` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `CCCD` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -107,6 +156,15 @@ CREATE TABLE `nhanvien` (
   `TRANG_THAI` int DEFAULT NULL,
   `VI_TRI` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`ID_NV`, `ID_TK`, `HO_NV`, `TEN_NV`, `CCCD`, `SDT`, `GIOI_TINH`, `DIA_CHI`, `NGAY_SINH`, `TRANG_THAI`, `VI_TRI`) VALUES
+(1, 2, 'Văn Thị Mỹ', 'Trang', '256987458954', '0756212323', 0, 'Phường Tân Bình, Vĩnh Long', '2002-03-02', 1, 'Quản lý'),
+(2, 3, 'Nguyễn ', 'Hùng', '222217452326', '0963256554', 1, 'Châu Thành, Tiền Giang', '2000-03-13', 1, 'Nhân viên'),
+(3, 4, 'Đỗ', 'Minh Anh', '256987459658', '0785454569', 0, 'Quận 3, Hồ Chí Minh', '1999-03-26', 1, 'Nh');
 
 -- --------------------------------------------------------
 
@@ -148,6 +206,17 @@ CREATE TABLE `phieunhap` (
   `TRANG_THAI` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`ID_PHIEUNHAP`, `ID_NCC`, `ID_TRAM`, `ID_NV`, `THOIGIAN_NHAP`, `TONG_TIEN`, `TRANG_THAI`) VALUES
+(1, 1, 'tr1p1', 1, NULL, 5000000, 1),
+(2, 2, 'tr1p1', 1, NULL, 300000, 1),
+(1820, 2, 'tr1p1', 1, '2024-03-20 23:49:20', NULL, 0),
+(7367, 1, 'tr1p1', 1, '2024-03-20 23:48:13', NULL, 0),
+(9374, 1, 'tr1p1', 1, '2024-03-20 23:47:37', NULL, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -161,9 +230,16 @@ CREATE TABLE `phieuxuat` (
   `ID_TRAM` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
   `THOIGIAN_XUAT` datetime DEFAULT NULL,
   `SO_LUONG` float DEFAULT NULL,
-  `TONG_TIEN` int DEFAULT NULL,
-  `DA_CHINHSUA` int DEFAULT NULL
+  `TONG_TIEN` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phieuxuat`
+--
+
+INSERT INTO `phieuxuat` (`ID_PHIEUXUAT`, `ID_NHIENLIEU`, `ID_NV`, `ID_TRAM`, `THOIGIAN_XUAT`, `SO_LUONG`, `TONG_TIEN`) VALUES
+(1, 1, 1, 'tr1p1', NULL, 5, 250000),
+(2, 2, 3, 'tr1p1', NULL, 2, 45000);
 
 -- --------------------------------------------------------
 
@@ -173,9 +249,21 @@ CREATE TABLE `phieuxuat` (
 
 CREATE TABLE `phuong` (
   `ID_PHUONG` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ID_TRAM` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TEN_PHUONG` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phuong`
+--
+
+INSERT INTO `phuong` (`ID_PHUONG`, `TEN_PHUONG`) VALUES
+('p1', 'Phường 1'),
+('p2', 'Phường 2'),
+('p3', 'Phường 3'),
+('p4', 'Phường 4'),
+('p5', 'Phường 5'),
+('p8', 'Phường 8'),
+('p9', 'Phường 9');
 
 -- --------------------------------------------------------
 
@@ -192,6 +280,15 @@ CREATE TABLE `taikhoan` (
   `TRANG_THAI` int DEFAULT NULL,
   `THOIGIAN_TAO` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`ID_TK`, `ID_NV`, `TEN_TK`, `PASSWORD`, `QUYEN`, `TRANG_THAI`, `THOIGIAN_TAO`) VALUES
+(2, 1, 'Trang123@', 'Trang12345678', 'Quản lý', 1, NULL),
+(3, 2, 'Hung123@', 'Hung123', 'Nhân viên', 1, NULL),
+(4, 3, 'Anh123@', 'Anh123456', 'Nhân viên', 1, NULL);
 
 --
 -- Triggers `taikhoan`
@@ -222,6 +319,19 @@ CREATE TABLE `tramxangdau` (
   `SUC_CHUA` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `tramxangdau`
+--
+
+INSERT INTO `tramxangdau` (`ID_TRAM`, `ID_PHUONG`, `TEN_TRAM`, `DIA_CHI`, `EMAIL`, `SDT`, `TRANG_THAI`, `SUC_CHUA`) VALUES
+('tr1p1', 'p1', 'Trạm xăng dầu 1P1', '120-142 Trưng Nữ Vương, Phường 1, Vĩnh Long', '1p1@gmail.com', '0484845963', 1, 1000),
+('tr1p2', 'p2', 'Trạm xăng dầu 1P2', '79 Nguyễn Huệ, Phường 2, Vĩnh Long', '1p2@gmail.com', '0484845336', 1, 1000),
+('tr1p3', 'p3', 'Trạm xăng dầu 1P3', '59/6B Mậu Thân, Phường 3, Vĩnh Long', '1p3@gmail.com', '0411145552', 1, 1000),
+('tr1p4', 'p4', 'Trạm xăng dầu 1P4', '59, Phạm Thái Bường, Phường 4, Vĩnh Long', '1p4@gmail.com', '0706356265', 1, 1000),
+('tr1p5', 'p5', 'Trạm xăng dầu 1P5', ' 121, Đinh Tiên Hoàng, Phường 5, Vĩnh Long', '1p5@gmail.com', '0756214523', 1, 1000),
+('tr1p8', 'p8', 'Trạm xăng dầu  1P8', '246B Đinh Tiên Hoàng, Phường 8, Vĩnh Long', '1p8@gmail.com', '0985623215', 1, 1500),
+('tr1p9', 'p9', 'Trạm xăng dầu  1P9', '166 Phạm Hùng, Phường 9, Thành phố Vĩnh Long, Tỉnh Vĩnh Long', '1p9@gmail.com', '0908562321', 1, 2000);
+
 -- --------------------------------------------------------
 
 --
@@ -233,6 +343,15 @@ CREATE TABLE `tram_nv` (
   `ID_TRAM` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
   `NGAY_CHUYEN` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tram_nv`
+--
+
+INSERT INTO `tram_nv` (`ID_NV`, `ID_TRAM`, `NGAY_CHUYEN`) VALUES
+(1, 'tr1p1', '2023-11-02'),
+(2, 'tr1p2', '2023-12-02'),
+(3, 'tr1p1', '2023-12-19');
 
 --
 -- Indexes for dumped tables
@@ -248,7 +367,8 @@ ALTER TABLE `banggia`
 -- Indexes for table `ctpn`
 --
 ALTER TABLE `ctpn`
-  ADD PRIMARY KEY (`ID_PHIEUNHAP`,`ID_NHIENLIEU`);
+  ADD PRIMARY KEY (`ID_PHIEUNHAP`,`ID_NHIENLIEU`),
+  ADD KEY `Fk_IDNHIENLIEU_NL` (`ID_NHIENLIEU`);
 
 --
 -- Indexes for table `dutru`
@@ -298,8 +418,7 @@ ALTER TABLE `phieuxuat`
 -- Indexes for table `phuong`
 --
 ALTER TABLE `phuong`
-  ADD PRIMARY KEY (`ID_PHUONG`),
-  ADD KEY `FK_PHUONG_TRAM` (`ID_TRAM`);
+  ADD PRIMARY KEY (`ID_PHUONG`);
 
 --
 -- Indexes for table `taikhoan`
@@ -330,13 +449,13 @@ ALTER TABLE `tram_nv`
 -- AUTO_INCREMENT for table `nhacungcap`
 --
 ALTER TABLE `nhacungcap`
-  MODIFY `ID_NCC` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_NCC` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `ID_NV` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_NV` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nhienlieu`
@@ -348,7 +467,7 @@ ALTER TABLE `nhienlieu`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `ID_TK` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_TK` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -364,7 +483,8 @@ ALTER TABLE `banggia`
 -- Constraints for table `ctpn`
 --
 ALTER TABLE `ctpn`
-  ADD CONSTRAINT `FK_CTPN_PN` FOREIGN KEY (`ID_PHIEUNHAP`) REFERENCES `phieunhap` (`ID_PHIEUNHAP`);
+  ADD CONSTRAINT `FK_CTPN_PN` FOREIGN KEY (`ID_PHIEUNHAP`) REFERENCES `phieunhap` (`ID_PHIEUNHAP`),
+  ADD CONSTRAINT `Fk_IDNHIENLIEU_NL` FOREIGN KEY (`ID_NHIENLIEU`) REFERENCES `nhienlieu` (`ID_NHIENLIEU`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `dutru`
@@ -394,12 +514,6 @@ ALTER TABLE `phieuxuat`
   ADD CONSTRAINT `FK_PX_NL` FOREIGN KEY (`ID_NHIENLIEU`) REFERENCES `nhienlieu` (`ID_NHIENLIEU`),
   ADD CONSTRAINT `FK_PX_NV` FOREIGN KEY (`ID_NV`) REFERENCES `nhanvien` (`ID_NV`),
   ADD CONSTRAINT `FK_PX_TRAM` FOREIGN KEY (`ID_TRAM`) REFERENCES `tramxangdau` (`ID_TRAM`);
-
---
--- Constraints for table `phuong`
---
-ALTER TABLE `phuong`
-  ADD CONSTRAINT `FK_PHUONG_TRAM` FOREIGN KEY (`ID_TRAM`) REFERENCES `tramxangdau` (`ID_TRAM`);
 
 --
 -- Constraints for table `taikhoan`
